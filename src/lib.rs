@@ -1,6 +1,8 @@
 extern crate base64;
 extern crate hex;
 
+use std::collections::HashMap;
+
 pub fn hex_to_base64(data: String) -> String {
 
     let bytes = hex::decode(data).unwrap();
@@ -23,10 +25,26 @@ pub fn xor_hex(ciphertext: String, key: String) -> String {
 
 }
 
+pub fn character_frequency(data: &String) -> HashMap<char, i32> {
+
+    let mut char_map: HashMap<char, i32> = HashMap::new();
+
+    for i in data.to_uppercase().chars().collect::<Vec<char>>() {
+        *char_map.entry(i).or_insert(0) += 1;
+    }
+
+    return char_map;
+
+}
+
 #[cfg(test)]
 mod test {
+
+    use std::collections::HashMap;
+
     use super::hex_to_base64;
     use super::xor_hex;
+    use super::character_frequency;
 
     #[test]
     fn convert_hex() {
@@ -41,5 +59,16 @@ mod test {
         let test_key = String::from("686974207468652062756c6c277320657965");
         let expected_result = String::from("746865206b696420646f6e277420706c6179");
         assert_eq!(xor_hex(test_input, test_key), expected_result);
+    }
+
+    #[test]
+    fn test_character_freq() {
+        let test_string = String::from("eiIeio");
+        let mut answer_map: HashMap<char, i32> = HashMap::new();
+        answer_map.insert('E', 2);
+        answer_map.insert('I', 3);
+        answer_map.insert('O', 1);
+
+        assert_eq!(character_frequency(&test_string), answer_map);
     }
 }
