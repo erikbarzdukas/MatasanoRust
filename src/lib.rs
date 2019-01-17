@@ -37,6 +37,11 @@ pub fn character_frequency(data: &String) -> HashMap<char, i32> {
 
 }
 
+pub fn sort_char_map(char_map: HashMap<char, i32>) -> String {
+    unimplemented!()
+
+}
+
 #[cfg(test)]
 mod test {
     use std::collections::HashMap;
@@ -44,6 +49,7 @@ mod test {
     use super::hex_to_base64;
     use super::xor_hex;
     use super::character_frequency;
+    use super::sort_char_map;
 
     #[test]
     fn convert_hex() {
@@ -69,5 +75,15 @@ mod test {
         answer_map.insert('O', 1);
 
         assert_eq!(character_frequency(&test_string), answer_map);
+    }
+
+    #[test]
+    fn test_character_ordering() {
+        let mut test_map: HashMap<char, i32> = HashMap::new();
+        test_map.insert('E', 2);
+        test_map.insert('I', 3);
+        test_map.insert('O', 1);
+
+        assert_eq!(sort_char_map(test_map), String::from("IEO"));
     }
 }
