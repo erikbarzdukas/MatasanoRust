@@ -42,6 +42,12 @@ pub fn sort_char_map(char_map: HashMap<char, i32>) -> String {
 
 }
 
+pub fn score_etaoin(data: String) -> i32 {
+    unimplemented!();
+    //Score first 6 chars of string against ETAOIN
+    //and last 6 against VKJXQZ
+}
+
 #[cfg(test)]
 mod test {
     use std::collections::HashMap;
@@ -50,6 +56,7 @@ mod test {
     use super::xor_hex;
     use super::character_frequency;
     use super::sort_char_map;
+    use super::score_etaoin;
 
     #[test]
     fn convert_hex() {
@@ -85,5 +92,10 @@ mod test {
         test_map.insert('O', 1);
 
         assert_eq!(sort_char_map(test_map), String::from("IEO"));
+    }
+
+    #[test]
+    fn test_score_etaoin() {
+        assert_eq!(score_etaoin(String::from("ETAOINVKJXQZ")), 12);
     }
 }
