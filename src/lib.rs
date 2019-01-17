@@ -43,9 +43,35 @@ pub fn sort_char_map(char_map: HashMap<char, i32>) -> String {
 }
 
 pub fn score_etaoin(data: String) -> i32 {
-    unimplemented!();
+
+    let etaoin = "ETAOIN";
+    let vkjxqz = "VKJXQZ";
+    let mut score = 0;
+
+    //Invalid string length to operate on, return score of 0
+    //Insert better error handling after prototype
+    if data.len() <= 11 {
+        return score;
+    }
+
     //Score first 6 chars of string against ETAOIN
     //and last 6 against VKJXQZ
+    let first_six = &data[0..6];
+    let last_six = &data[data.len()-6..data.len()];
+
+    for i in first_six.chars() {
+        if etaoin.contains(i) {
+            score +=1;
+        }
+    }
+
+    for i in last_six.chars() {
+        if vkjxqz.contains(i) {
+            score += 1;
+        }
+    }
+
+    score
 }
 
 #[cfg(test)]
@@ -97,5 +123,10 @@ mod test {
     #[test]
     fn test_score_etaoin() {
         assert_eq!(score_etaoin(String::from("ETAOINVKJXQZ")), 12);
+    }
+
+    #[test]
+    fn test_score_etaoin_short_string() {
+        assert_eq!(score_etaoin(String::from("ETAOIN")), 0);
     }
 }
