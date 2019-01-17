@@ -39,7 +39,6 @@ pub fn character_frequency(data: &String) -> HashMap<char, i32> {
 
 #[cfg(test)]
 mod test {
-
     use std::collections::HashMap;
 
     use super::hex_to_base64;
