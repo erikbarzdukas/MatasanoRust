@@ -6,7 +6,7 @@ use std::collections::HashMap;
 pub fn hex_to_base64(data: String) -> String {
 
     let bytes = hex::decode(data).unwrap();
-    return base64::encode(&bytes)
+    base64::encode(&bytes)
 
 }
 
@@ -21,7 +21,7 @@ pub fn xor_hex(ciphertext: String, key: String) -> String {
         result_bytes.push(cipher_bytes[i] ^ key_bytes[i]);
     }
 
-    return hex::encode(result_bytes)
+    hex::encode(result_bytes)
 
 }
 
@@ -33,12 +33,30 @@ pub fn character_frequency(data: &String) -> HashMap<char, i32> {
         *char_map.entry(i).or_insert(0) += 1;
     }
 
-    return char_map;
+    char_map
 
 }
 
 pub fn sort_char_map(char_map: HashMap<char, i32>) -> String {
-    unimplemented!()
+    let mut sorted_pairs: Vec<(i32, char)> = Vec::new();
+    let mut sorted_string = String::new();
+
+    for (letter, count) in  &char_map {
+        sorted_pairs.push((*count, *letter));
+    }
+
+    //Sort function sorts least to greatest
+    sorted_pairs.sort();
+    sorted_pairs.reverse();
+
+    println!("{:?}", sorted_pairs);
+
+    for pair in sorted_pairs {
+        sorted_string.push(pair.1);
+    }
+
+    sorted_string
+
 
 }
 
